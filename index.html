@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasze przygody ❤️ - Scrapbook</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ✨ SCRAPBOOK STYLE WITH GRID PAPER */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f0e8;
+            background-image: 
+                linear-gradient(rgba(139, 125, 107, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 125, 107, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .container {
+            background: #fefdfb;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                inset 0 0 60px rgba(139, 125, 107, 0.03);
+            text-align: center;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(139, 125, 107, 0.2);
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.2),
+                inset 0 0 60px rgba(139, 125, 107, 0.03);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #4a4238;
+            margin-bottom: 40px;
+            font-size: 3em;
+            font-weight: 400;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b7d6b, transparent);
+        }
+
+        /* Photo container - flexible for both portrait and landscape */
+        .photo-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 35px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 30px rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+            border: 8px solid #fefdfb;
+            background: #f8f6f3;
+            transition: transform 0.3s ease;
+        }
+
+        /* Photo corners - scrapbook style */
+        .photo-container::before,
+        .photo-container::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            z-index: 10;
+        }
+
+        .photo-container::before {
+            top: 5px;
+            left: 5px;
+            border-width: 20px 20px 0 0;
+            border-color: rgba(139, 125, 107, 0.3) transparent transparent transparent;
+        }
+
+        .photo-container::after {
+            bottom: 5px;
+            right: 5px;
+            border-width: 0 0 20px 20px;
+            border-color: transparent transparent rgba(139, 125, 107, 0.3) transparent;
+        }
+
+        .photo-container:hover {
+            transform: rotate(-1deg) scale(1.02);
+        }
+
+        .photo-container img {
+            max-width: 100%;
+            max-height: 600px;
+            width: 100%;
+            height: auto;
+            display: block;
+            animation: fadeIn 0.6s ease-in;
+            filter: sepia(8%) contrast(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .message {
+            font-family: 'Cormorant Garamond', serif;
+            color: #6b5d52;
+            font-size: 1.5em;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        button {
+            font-family: 'Montserrat', sans-serif;
+            background: #8b7d6b;
+            color: #fefdfb;
+            border: none;
+            padding: 14px 45px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: 
+                0 5px 15px rgba(139, 125, 107, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        button:hover {
+            background: #6b5d52;
+            box-shadow: 
+                0 8px 25px rgba(139, 125, 107, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                background-size: 15px 15px;
+            }
+
+            .container {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .message {
+                font-size: 1.3em;
+            }
+
+            button {
+                padding: 12px 35px;
+                font-size: 0.8em;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .photo-container {
+                max-width: 100%;
+                border-width: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background-size: 12px 12px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.9em;
+                letter-spacing: 1px;
+            }
+
+            .message {
+                font-size: 1.2em;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nasze wspólne chwile</h1>
+        
+        <div class="photo-container">
+            <img id="randomPhoto" src="" alt="Our photo">
+        </div>
+        
+        <p class="message" id="message">Ładuję nasz specjalny moment ...</p>
+        
+        <button onclick="loadRandomPhoto()">A jakieś inne wspomnienie?</button>
+    </div>
+
+    <script>
+        const photos = [
+            'https://picsum.photos/400/600?random=1',
+            'https://picsum.photos/600/400?random=2',
+            'https://picsum.photos/400/600?random=3',
+            'https://picsum.photos/600/400?random=4',
+            'https://picsum.photos/500/500?random=5',
+            'https://picsum.photos/400/600?random=6',
+            'https://picsum.photos/600/400?random=7',
+            'https://picsum.photos/400/600?random=8'
+        ];
+
+        const messages = [
+            'Thank you boss',
+            'A umyty? ',
+            'Stinker level: high ',
+            'Sheldon - ogarnij się! ',
+            'Bardzo Cię kocham ',
+            'I miss the boy',
+            'Kocham Cię',
+            'Big boy',
+            'Wypuście mnie, wariaty moje!! ',
+            'That\’s insane! ',
+            'When you get angry, this is who you\’re angry at …',
+            'I am at my limit ',
+            'Jestem najszczęśliwsza na świecie, bo jestem z Tobą!',
+            'You the best <3 ',
+            'Każdy dzień z Tobą sprawia, że zakochuję się jeszcze bardziej … ',
+            'But like … are we going to be together forever?? ',
+            'Sweet treat for my soul',
+            'My loooooooove',
+            'A co dzisiaj jemy? ',
+            'Gdzie stoi betka??',
+            'Czy mogę dzisiaj pograć?',
+            'Jestem gotowa na tuck in',
+            'Jestem z Ciebie bardzo dumna <3',
+            'You are very cool',
+            'Kto by pomyślał, że trafi nam się taka miłość',
+            'Idealnie dobrani',
+            'Jesteś najwspanialszy na świecie!',
+            'Are we like best friends or what?',
+            'Very hot boyfriend',
+            'Pamiętasz ten dzień?',
+            'Dziękuję za to, że jesteś',
+            'Zawsze wdzięczna za Ciebie!'
+        ];
+
+        let currentPhotoIndex = 0;
+
+        function loadRandomPhoto() {
+            currentPhotoIndex = Math.floor(Math.random() * photos.length);
+            const photoUrl = photos[currentPhotoIndex];
+            
+            const randomMessageIndex = Math.floor(Math.random() * messages.length);
+            const message = messages[randomMessageIndex];
+            
+            const imgElement = document.getElementById('randomPhoto');
+            imgElement.style.animation = 'none';
+            setTimeout(() => {
+                imgElement.src = photoUrl;
+                imgElement.style.animation = 'fadeIn 0.6s ease-in';
+            }, 10);
+            
+            document.getElementById('message').textContent = message;
+        }
+
+        window.onload = loadRandomPhoto;
+    </script>
+</body>
+</html>
