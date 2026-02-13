@@ -352,12 +352,15 @@
     // Fade out
     imgElement.style.opacity = '0';
     
-    // Change image and message after fade out
+    // Wait for fade out, then change content
     setTimeout(() => {
         imgElement.src = photoUrl;
         document.getElementById('message').textContent = message;
-        // Fade in
-        imgElement.style.opacity = '1';
+        
+        // Fade back in
+        setTimeout(() => {
+            imgElement.style.opacity = '1';
+        }, 50);
     }, 500);
 }
         }
