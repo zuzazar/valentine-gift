@@ -328,20 +328,25 @@
         let currentPhotoIndex = 0;
 
         function loadRandomPhoto() {
-            currentPhotoIndex = Math.floor(Math.random() * photos.length);
-            const photoUrl = photos[currentPhotoIndex];
-            
-            const randomMessageIndex = Math.floor(Math.random() * messages.length);
-            const message = messages[randomMessageIndex];
-            
-            const imgElement = document.getElementById('randomPhoto');
-            imgElement.style.animation = 'none';
-            setTimeout(() => {
-                imgElement.src = photoUrl;
-                imgElement.style.animation = 'fadeIn 0.6s ease-in';
-            }, 10);
-            
-            document.getElementById('message').textContent = message;
+    currentPhotoIndex = Math.floor(Math.random() * photos.length);
+    const photoUrl = photos[currentPhotoIndex];
+    
+    const randomMessageIndex = Math.floor(Math.random() * messages.length);
+    const message = messages[randomMessageIndex];
+    
+    const imgElement = document.getElementById('randomPhoto');
+    
+    // Fade out
+    imgElement.style.opacity = '0';
+    
+    // Change image and message after fade out
+    setTimeout(() => {
+        imgElement.src = photoUrl;
+        document.getElementById('message').textContent = message;
+        // Fade in
+        imgElement.style.opacity = '1';
+    }, 500);
+}
         }
 
         window.onload = loadRandomPhoto;
