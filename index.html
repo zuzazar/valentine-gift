@@ -139,14 +139,15 @@
             transform: rotate(-1deg) scale(1.02);
         }
 
-       .photo-container img {
+     .photo-container img {
     max-width: 100%;
     max-height: 600px;
     width: 100%;
     height: auto;
     display: block;
+    animation: fadeIn 0.6s ease-in;
     filter: sepia(8%) contrast(1.05);
-    transition: opacity 0.5s ease-in-out;
+}
         }
 
         @keyframes fadeIn {
@@ -348,20 +349,13 @@
     const message = messages[randomMessageIndex];
     
     const imgElement = document.getElementById('randomPhoto');
-    
-    // Fade out
-    imgElement.style.opacity = '0';
-    
-    // Wait for fade out, then change content
+    imgElement.style.animation = 'none';
     setTimeout(() => {
         imgElement.src = photoUrl;
-        document.getElementById('message').textContent = message;
-        
-        // Fade back in
-        setTimeout(() => {
-            imgElement.style.opacity = '1';
-        }, 50);
-    }, 500);
+        imgElement.style.animation = 'fadeIn 0.6s ease-in';
+    }, 10);
+    
+    document.getElementById('message').textContent = message;
 }
         }
 
